@@ -1,0 +1,18 @@
+<?php
+/**
+ * Listing of recent blog articles
+ */
+?>
+<h1><a href="/">Jurian Sluiman &middot; blog posts</a></h1>
+
+<section itemscope itemtype="http://schema.org/Blog">
+    <?php foreach ($articles as $article):?>
+        <article class="blog-article" itemscope itemtype="http://schema.org/BlogPosting">
+            <time datetime="2014-12-02T21:00:00+01:00" pubdate itemprop="datePublished" content="2014-12-02T21:00:00+01:00" class="blog-article-publishdate blog-listing-publishdate">December 2014</time>
+            <h2 itemprop="name" class="blog-listing-title"><a href="<?= $app->urlFor('article', ['id' => $article['id']])?>" itemprop="url"><?= $article['title']?></a></h2>
+            <div itemprop="description" class="blog-listing-description"><?= $article['lead']?></div>
+        </article>
+    <?php endforeach ?>
+
+    <p><em>More posts are available in the <a href="/archive">archive</a>.</em></p>
+</section>
