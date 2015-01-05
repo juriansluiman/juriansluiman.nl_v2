@@ -37,9 +37,9 @@ $app->get('/contact', function () use ($app) {
  * Error handling routes
  */
 $app->error(function (Exception $e) use ($app) {
-    $app->render('500.phtml', ['exception' => $e]);
+    $app->render('error/500.phtml', ['exception' => $e]);
 });
 
 $app->notFound(function () use ($app) {
-    $app->render('404.phtml');
+    $app->render('error/404.phtml');
 });
