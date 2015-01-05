@@ -1,6 +1,6 @@
 <?php
 
-return [
+$config = [
     'view'   => 'Slim\LayoutView',
     'layout' => 'layout.phtml',
     'debug'  => false,
@@ -9,3 +9,9 @@ return [
         'prefix' => 'jurian',
     ],
 ];
+
+if (file_exists('app/config.local.php')) {
+    $config = Zend\Stdlib\ArrayUtils::merge($config, include('app/config.local.php'));
+}
+
+return $config;
