@@ -1,0 +1,12 @@
+<article class="blog-article">
+    <header>
+        <time class="blog-article-publishdate">December 2014</time>
+        <h1 class="blog-article-title">
+            <a href="<?= $app->urlFor('article', ['id' => $article['id']])?>" itemprop="url"><?= $article['title']?></a>
+        </h1>
+    </header>
+
+    <div><?= $article['lead']?></div>
+
+    <div><?= $article['body']?></div>
+</article>

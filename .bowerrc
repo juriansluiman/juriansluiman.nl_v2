@@ -1,0 +1,10 @@
+{
+  "directory" : "public/bower_components",
+  "analytics" : false,
+  "registry"  : {
+    "search": [
+      "https://bower.herokuapp.com"
+    ]
+  },
+  "cache"     : "data/bower-cache"
+}

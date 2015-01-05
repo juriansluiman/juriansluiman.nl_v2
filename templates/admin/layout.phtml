@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title><?= (isset($title)) ? $title . ' &middot; ' : null ?>Jurian Sluiman</title>
+    <!-- <meta name="description" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:creator" content="@juriansluiman">
+    <meta name="twitter:title" content="<?//= $article['title']?>">
+    <meta name="twitter:description" content=""> -->
+    <meta name="copyright" content="Jurian Sluiman 2006-2015">
+    <meta name="generator" content="http://github.com/juriansluiman.nl">
+    <meta name="viewport"  content="width=device-width, initial-scale=1">
+    <link href="//fast.fonts.net/cssapi/36620992-14f0-4ddb-91fb-f0f85808413d.css" media="screen" rel="stylesheet" type="text/css">
+    <link href="https://plus.google.com/102726331143136952916?rel=author" rel="author">
+    <link href="https://juriansluiman.nl/styles/css/styles.css?59d8aab" media="screen" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    </head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+    <main role="main" id="content"><?= $yield?></main>
+
+    <footer role="contentinfo" class="page-footer">
+        <p>&copy; Jurian Sluiman 2006-2015 &mdash; All content is licensed under the <a href="https://creativecommons.org/licenses/by-sa/3.0/">Creative Commons BY-SA 3.0</a> unless otherwise stated.</p>
+
+        <nav>
+            <ul class="navigation-footer">
+                <li><a href="<?= $app->urlFor('home')?>">blog</a></li>
+                <li><a href="<?= $app->urlFor('about')?>">about me</a></li>
+                <li><a href="<?= $app->urlFor('contact')?>">contact</a></li>
+            </ul>
+
+            <ul class="navigation-footer">
+                <li><a href="https://twitter.com/juriansluiman">twitter</a></li>
+                <li><a href="https://linkedin.com/in/juriansluiman">linkedin</a></li>
+                <li><a href="https://github.com/juriansluiman">github</a></li>
+            </ul>
+        </nav>
+    </footer>
+
+    <script type="text/javascript">
+    //<!--
+    /*var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-3615149-2']);
+    _gaq.push(['_trackPageview']);
+    (function () {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();*/
+
+        //-->
+    </script>
+    <script type="text/javascript" src="/scripts/prism.js?59d8aab"></script>
+    <script type="text/javascript">
+        //<!--
+        WebFontConfig = {
+      google: { families: [ 'Source Code Pro' ] }
+    };
+
+    (function () {
+      var wf = document.createElement('script');
+      wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+               '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+      wf.type = 'text/javascript';
+      wf.async = 'true';
+
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(wf, s);
+    })();
+        //-->
+    </script>
+</body>
+</html>

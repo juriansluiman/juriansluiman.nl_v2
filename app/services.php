@@ -10,9 +10,7 @@ $app->container->singleton('redis', function () use ($app) {
 
 $app->container->singleton('repository', function () use ($app) {
     $config     = $app->config('redis');
-    $repository = new App\Repository\ArticleRepository($app->redis, $config['prefix']);
-
-    return $repository;
+    return new App\Repository\ArticleRepository($app->redis, $config['prefix']);
 });
 
 $app->container->singleton('slugifier', function () use ($app) {

@@ -14,7 +14,14 @@ $app->get('/article/:id(/:slug)', function ($id, $slug) use ($app) {
 })->name('article');
 
 $app->get('/archive(/:page)', function ($page = 1) use ($app) {
-    $app->render('archive.phtml');
+    $count    = $app->repository->getTotalCount();
+    $perPage  = 25;
+    $from     = ($page-1) * $perPage;
+    $to       = $page * $perPage;
+    $pages    = ceil($count/$perPage);
+    $articles = $app->repository->fetchOffset($from, $to);
+
+    $app->render('blog/archive.phtml', ['articles' => $articles, 'pages' => $pages, 'page' => $page]);
 });
 
 $app->get('/import', function () use ($app) {
@@ -86,3 +93,57 @@ $app->post('/logout', $authentication, function () use ($app) {
     unset($app->session->admin);
     $app->redirect($app->urlFor('home'));
 })->name('logout');
+
+/*
+ * Admin routes
+ */
+$app->get('/admin', $authentication, function () use ($app) {
+    $app->render('admin/dashboard.phtml');
+})->name('admin');
+
+$app->group('/admin', $authentication, function () use ($app) {
+    $app->get('/blog', function () use ($app) {
+        $articles = $app->repository->fetchAll();
+        $app->render('admin/blog/index.phtml', ['articles' => $articles, 'layout' => 'admin/layout.phtml']);
+    })->name('admin-blog');
+
+    $app->group('/blog', function () use ($app) {
+        $app->get('/create', function () use ($app) {
+            $app->render('admin/blog/new.phtml', ['layout' => 'admin/layout.phtml']);
+        })->name('admin-blog-create');
+
+        $app->post('/create', function () use ($app) {
+            // Validate?
+
+            $data = $app->request->post();
+            $id   = $app->repository->persist($data);
+
+            $app->flash('success', 'A new blog post has been created!');
+            $app->redirect($app->urlFor('admin-blog-edit'), ['id' => $id]);
+        });
+
+        $app->get('/:id', function ($id) use ($app) {
+            $article = $app->repository->fetchArticle($id);
+            $app->render('admin/blog/edit.phtml', ['article' => $article, 'layout' => 'admin/layout.phtml']);
+        })->name('admin-blog-edit');
+
+        $app->put('/:id', function ($id) use ($app) {
+            // Validate?
+
+            $data = $app->request->post();
+            $id   = $app->repository->update($id, $data);
+
+            $app->flash('success', 'Your blog post has been saved!');
+            $app->redirect($app->urlFor('admin-blog-edit'), ['id' => $id]);
+        });
+
+        $app->delete('/:id', function ($id) use ($app) {
+            $app->repository->remove($id);
+            $app->redirect($app->urlFor('admin-blog'));
+        });
+    });
+
+    $app->group('/guide', function () use ($app) {
+
+    });
+});

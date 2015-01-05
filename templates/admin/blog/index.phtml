@@ -1,0 +1,12 @@
+<?php
+/**
+ * Listing of all blog articles for the admin
+ */
+?>
+<ul>
+    <?php foreach ($articles as $article):?>
+        <li>
+            <a href="<?= $app->urlFor('admin-blog-edit', ['id' => $article['id']]) ?>"><?= $article['title']?></a>
+        </li>
+    <?php endforeach ?>
+</ul>

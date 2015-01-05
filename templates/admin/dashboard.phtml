@@ -1,0 +1,29 @@
+<?php
+/**
+ *
+ */
+?>
+
+<h1>Admin</h1>
+
+<h2>Blog articles</h2>
+
+<p>The recent five posts:</p>
+
+<ul>
+    <li><a href="">Enable composer bash completion on Ubuntu</a></li>
+    <li><a href="">On leaving your own business</a></li>
+    <li><a href="">Managing ssh known hosts with ansible</a></li>
+    <li><a href="">Track Google Analytics events on outbound links</a></li>
+</ul>
+
+<p><a href="<?= $app->urlFor('admin-blog')?>">View all created posts</a> or <a href="<?= $app->urlFor('admin-blog-create')?>">create a new one</a>.</p>
+
+<h2>Practices of good module design</h2>
+
+<p></p>
+
+
+<form method="post" action="<?= $app->urlFor('logout')?>">
+    <input type="submit" value="Logout">
+</form>

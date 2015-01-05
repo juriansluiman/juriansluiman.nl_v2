@@ -1,0 +1,8 @@
+{
+  "name": "juriansluiman.nl",
+  "version": "2.0.0-alpha1",
+  "dependencies": {
+    "gulp-concat": "^2.4.3",
+    "gulp-minify-css": "^0.3.11"
+  }
+}
