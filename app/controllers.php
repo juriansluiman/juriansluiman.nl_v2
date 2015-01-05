@@ -43,3 +43,46 @@ $app->error(function (Exception $e) use ($app) {
 $app->notFound(function () use ($app) {
     $app->render('error/404.phtml');
 });
+
+/*
+ * Authentication
+ */
+$authentication = function () use ($app) {
+    if (true !== $app->session->admin) {
+        $app->redirect($app->urlFor('home'));
+    }
+};
+
+$app->get('/login', function () use ($app) {
+    if ($app->session->admin === true) {
+        $app->redirect($app->urlFor('admin'));
+    }
+
+    $token  = Zend\Math\Rand::getString(20);
+    $token  = str_replace(['+', '/'], '@', $token);
+    $config = $app->config('auth');
+
+    $app->session->token = $token;
+    $app->email->send('auth/email.phtml', ['token' => $token], $config + ['subject' => 'Login token for juriansluiman.nl']);
+
+    $app->render('auth/login.phtml');
+})->name('login');
+
+$app->get('/authenticate/:token', function ($token) use ($app) {
+    $session = $app->session;
+    if (!isset($session->token) || $token !== $app->session->token) {
+        var_dump($token, $session->token);exit;
+        $app->redirect($app->urlFor('home'));
+    }
+
+    $session->getManager()->regenerateId();
+    $session->admin = true;
+    unset($app->session->token);
+
+    $app->redirect($app->urlFor('admin'));
+})->name('authenticate');
+
+$app->post('/logout', $authentication, function () use ($app) {
+    unset($app->session->admin);
+    $app->redirect($app->urlFor('home'));
+})->name('logout');

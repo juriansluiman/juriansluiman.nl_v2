@@ -5,8 +5,17 @@ $config = [
     'layout' => 'layout.phtml',
     'debug'  => false,
     'redis'  => [
-        'socket' => '127.0.0.1',//'/tmp/redis.sock',
-        'prefix' => 'jurian',
+        'socket' => '127.0.0.1',
+        'prefix' => '',
+    ],
+    'session' => '',
+    'email'   => [
+        'api_key' => '',
+        'domain'  => '',
+        'from'    => '',
+    ],
+    'auth' => [
+        'to' => '',
     ],
 ];
 

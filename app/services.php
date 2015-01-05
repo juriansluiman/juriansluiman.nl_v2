@@ -20,3 +20,15 @@ $app->container->singleton('slugifier', function () use ($app) {
         new BaconStringUtils\UniDecoder
     );
 });
+
+$app->container->singleton('session', function () use ($app) {
+    $config = $app->config('session');
+    return new Zend\Session\Container($config);
+});
+
+$app->container->singleton('email', function () use ($app) {
+    $config    = $app->config('email');
+    $transport = new Mailgun\Mailgun($config['api_key']);
+
+    return new App\Mail\EmailService($app, $transport, $config);
+});
