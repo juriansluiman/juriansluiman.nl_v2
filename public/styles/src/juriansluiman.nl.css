@@ -1,0 +1,155 @@
+@charset 'UTF-8';
+
+/**
+ * General Skeleton overrides
+ */
+body {
+    font-family: 'Minion W01 Regular', Garamond, Georgia, serif;
+    font-size: 2.2rem;
+    color: #222;
+}
+
+h1, h2, h3 {
+    font-family: 'Myriad W01 Lt', Helvetica, Verdana, sans-serif;
+    letter-spacing: 0;
+}
+
+h1 a, h2 a, h3 a {
+    text-decoration: none;
+}
+
+h1 {
+    margin-top: 1rem;
+    font-size: 3.6rem;
+}
+h2 {
+    font-size: 3rem;
+}
+h3 {
+    font-style: 2.2rem;
+}
+
+a {
+    color: #222;
+}
+
+a:hover {
+    color: #222;
+}
+
+em {
+    font-family: 'Minion W01 It';
+    font-style: normal;
+}
+
+strong {
+    font-family: 'Minion W01 Bd';
+    font-weight: normal;
+}
+
+q {
+    font-family: 'Minion W01 It';
+    font-size: 3rem;
+    margin: 2rem 0;
+    text-align: center;
+    display: block;
+    position: relative;
+    width: 120%;
+    left: -10%;
+}
+
+code {
+    padding: 0;
+    margin: 0;
+    font-size: 1.8rem;
+    font-family: 'Source Code Pro', mono;
+    background-color: transparent;
+    border: none;
+}
+
+
+.container {
+    max-width: 575px;
+}
+
+/**
+ * Theme layout
+ */
+.page-footer {
+    font-size: 1.5rem;
+}
+
+.footer-nav {
+    list-style: none;
+    margin: -1em 0;
+    padding: 0;
+}
+
+.footer-nav li:nth-child(2) {
+    text-align: center;
+}
+
+.footer-nav li:last-child {
+    text-align: right;
+}
+
+.full-width {
+    width: 100%;
+}
+
+/**
+ * Blog styles
+ */
+.blog-article {
+    margin-bottom: 5rem;
+}
+
+.blog-article-title {
+    margin-bottom: 0;
+}
+
+.blog-article p {
+    text-align: justify;
+}
+
+.blog-article-continue, .blog-article-publishdate {
+    font-size: 1.5rem;
+}
+
+.blog-article-continue {
+    margin-top: -1.5rem;
+}
+
+.blog-article-publishdate {
+    display: block;
+    margin-bottom: 2rem;
+    color: #999;
+}
+
+.blog-article-continue a {
+    color: #999;
+    text-decoration: none;
+}
+
+.blog-article-continue a:hover {
+    border-bottom: 1px solid #999;
+}
+
+.blog-article-continue a:before {
+    content: '\00bb';
+    margin-right: 0.3rem;
+}
+
+/**
+ * About page styles
+ */
+
+.about-experience, .about-education {
+    margin-left: 2rem;
+    list-style-type: disc;
+}
+
+.about-experience li, .about-education li {
+    line-height: 1;
+    font-size: 1.9rem;
+}

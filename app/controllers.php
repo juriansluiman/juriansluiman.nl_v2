@@ -5,12 +5,12 @@
  */
 $app->get('/', function () use ($app) {
     $articles = $app->repository->fetchRecent(10);
-    $app->render('recent.phtml', ['articles' => $articles]);
+    $app->render('blog/recent.phtml', ['articles' => $articles]);
 })->name('home');
 
 $app->get('/article/:id(/:slug)', function ($id, $slug) use ($app) {
     // We have the article already from the pre-dispatch hook
-    $app->render('article.phtml', ['article' => $app->article]);
+    $app->render('blog/article.phtml', ['article' => $app->article]);
 })->name('article');
 
 $app->get('/archive(/:page)', function ($page = 1) use ($app) {
