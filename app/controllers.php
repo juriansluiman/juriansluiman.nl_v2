@@ -26,11 +26,11 @@ $app->get('/import', function () use ($app) {
  * Static routes
  */
 $app->get('/about', function () use ($app) {
-    $app->render('about.phtml');
+    $app->render('static/about.phtml');
 })->name('about');
 
 $app->get('/contact', function () use ($app) {
-    $app->render('contact.phtml');
+    $app->render('static/contact.phtml');
 })->name('contact');
 
 /*
