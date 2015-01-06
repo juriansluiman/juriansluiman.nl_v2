@@ -78,7 +78,6 @@ $app->get('/login', function () use ($app) {
 $app->get('/authenticate/:token', function ($token) use ($app) {
     $session = $app->session;
     if (!isset($session->token) || $token !== $app->session->token) {
-        var_dump($token, $session->token);exit;
         $app->redirect($app->urlFor('home'));
     }
 
