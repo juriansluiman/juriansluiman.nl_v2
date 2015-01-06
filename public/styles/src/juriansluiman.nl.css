@@ -200,3 +200,36 @@ pre {
 .token.comment {
     color: #999;
 }
+
+@media screen and (max-width:700px) {
+    q {
+        width: 100%;
+        left: 0;
+    }
+
+    pre {
+        width: 95%;
+        left: 0;
+        padding-left: 0.6em;
+    }
+
+    p {
+        overflow: hidden;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .footer-nav .one-third.column {
+        width: 30%;
+    }
+    .blog-article p {
+       text-align: left;
+    }
+    .fa-3x {
+        font-size: 2em !important;
+    }
+
+    .contact-socials a {
+        width: 20%;
+    }
+}
