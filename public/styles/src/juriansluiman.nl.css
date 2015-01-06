@@ -97,6 +97,12 @@ code {
     width: 100%;
 }
 
+blockquote {
+    border-left: 5px solid #f6f6f6;
+    padding-left: 2rem;
+    margin-left: 2rem;
+}
+
 /**
  * Blog styles
  */
