@@ -159,3 +159,32 @@ blockquote {
     line-height: 1;
     font-size: 1.9rem;
 }
+
+/**
+ * Prism style override
+ */
+pre code {
+    line-height: 1.2;
+    font-size: 1.6rem;
+    font-family: 'Source Code Pro', monospace;
+
+}
+
+pre {
+    display: inline-block;
+    background-color: #f4f4f4;
+    color: #060606;
+    padding: 0.6em;
+    padding-left: 5.5%;
+    width: 105%;
+    position: relative;
+    left: -5.5%;
+    overflow: auto;
+
+    white-space: pre;
+    word-break: normal;
+}
+
+.token.comment {
+    color: #999;
+}
