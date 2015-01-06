@@ -161,6 +161,18 @@ blockquote {
 }
 
 /**
+ * Contact page styles
+ */
+.contact-socials a {
+    display: inline-block;
+    width: 24%;
+    text-align: center;
+}
+.contact-socials i:hover {
+    text-decoration: underline;
+}
+
+/**
  * Prism style override
  */
 pre code {
