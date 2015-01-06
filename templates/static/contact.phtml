@@ -2,7 +2,9 @@
 /**
  * Contact page
  */
-$app->view->setData('title', 'Contact me');
+// Hack, see http://help.slimframework.com/discussions/questions/4686-slimviewsetdata-protects-closures
+$title  = $title();
+$title('Contact me');
 ?>
 <section>
     <h1>

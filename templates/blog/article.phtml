@@ -2,7 +2,18 @@
 /**
  * Blog article page to view a single article
  */
-$app->view->setData('title', $article['title']);
+// Hack, see http://help.slimframework.com/discussions/questions/4686-slimviewsetdata-protects-closures
+$title  = $title();
+$meta   = $meta();
+$script = $script();
+$desc   = strip_tags($article['lead']);
+
+$title($article['title']);
+$meta('description', $desc);
+$meta('twitter:card', 'summary');
+$meta('twitter:creator', '@juriansluiman');
+$meta('twitter:title', $article['title']);
+$meta('twitter:description', $desc);
 ?>
 <article itemscope itemtype="http://schema.org/BlogPosting">
     <header>
