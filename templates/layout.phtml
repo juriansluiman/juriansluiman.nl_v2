@@ -33,8 +33,7 @@ $script = $script();
         </ul>
     </footer>
 
-    <script type="text/javascript">
-//<!--
+    <?= $script(null, <<<SCRIPT
 WebFontConfig = {
   google: { families: [ 'Source Code Pro' ] }
 };
@@ -49,7 +48,7 @@ WebFontConfig = {
   var s = document.getElementsByTagName('script')[0];
   s.parentNode.insertBefore(wf, s);
 })();
-//-->
-</script>
+SCRIPT
+) ?>
 </body>
 </html>
