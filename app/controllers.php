@@ -30,6 +30,16 @@ $app->get('/import', function () use ($app) {
 });
 
 /*
+ * Search routes
+ */
+$app->get('/search', function () use ($app) {
+    $query  = $app->request->get('q');
+    $config = $app->config('search');
+
+    $app->render('search/results.phtml', ['query' => $query, 'key' => $config['key'], 'cx' => $config['cx']]);
+})->name('search');
+
+/*
  * Static routes
  */
 $app->get('/about', function () use ($app) {

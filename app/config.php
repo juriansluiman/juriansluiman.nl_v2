@@ -17,6 +17,10 @@ $config = [
     'auth' => [
         'to' => '',
     ],
+    'search' => [
+        'key' => '',
+        'cx'  => '',
+    ],
 ];
 
 if (file_exists('app/config.local.php')) {
