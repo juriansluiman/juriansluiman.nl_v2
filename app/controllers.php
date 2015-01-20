@@ -11,7 +11,7 @@ $app->get('/', function () use ($app) {
 $app->get('/article/:id(/:slug)', function ($id, $slug) use ($app) {
     // We have the article already from the pre-dispatch hook
     $app->render('blog/article.phtml', ['article' => $app->article]);
-})->name('article');
+})->conditions(['id' => '\d+'])->name('article');
 
 $app->get('/archive(/:page)', function ($page = 1) use ($app) {
     $count    = $app->repository->getTotalCount();
@@ -22,7 +22,7 @@ $app->get('/archive(/:page)', function ($page = 1) use ($app) {
     $articles = $app->repository->fetchOffset($from, $to);
 
     $app->render('blog/archive.phtml', ['articles' => $articles, 'pages' => $pages, 'page' => $page]);
-});
+})->conditions(['page' => '\d+']);
 
 $app->get('/import', function () use ($app) {
     $app->repository->import();
