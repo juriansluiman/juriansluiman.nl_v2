@@ -1,0 +1,31 @@
+<?php
+/**
+ * RSS feed of latest blog articles
+ *
+ * We echo the XML declaration because it is otherwise interpreted by PHP
+ */
+
+echo '<?xml version="1.0" encoding="UTF-8"?>';
+?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:slash="http://purl.org/rss/1.0/modules/slash/">
+  <channel>
+    <title>Jurian Sluiman</title>
+    <description>Blog feed of Jurian Sluiman</description>
+    <pubDate>Tue, 30 Dec 2014 13:01:58 +0100</pubDate>
+    <generator>Jurian Sluiman custom blog engine (http://github.com/juriansluiman.nl)</generator>
+    <link>https://juriansluiman.nl/</link>
+    <atom:link rel="self" type="application/rss+xml" href="https://juriansluiman.nl/feed"/>
+
+    <?php foreach ($articles as $article):?>
+        <?php $url = $app->urlFor('article', ['id' => $article['id'], 'slug' => $app->slugifier->slugify($article['title'])]) ?>
+        <item>
+            <title><?= $article['title']?></title>
+            <description><![CDATA[<?= $article['lead'] . $article['body']?>]]></description>
+            <pubDate>Tue, 30 Dec 2014 13:01:58 +0100</pubDate>
+            <link>https://juriansluiman.nl<?= $url ?></link>
+            <guid>https://juriansluiman.nl<?= $url ?></guid>
+            <? // <slash:comments>0</slash:comments> ?>
+        </item>
+    <?php endforeach ?>
+  </channel>
+</rss>

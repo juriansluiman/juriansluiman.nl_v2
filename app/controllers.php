@@ -25,6 +25,12 @@ $app->get('/archive(/:page)', function ($page = 1) use ($app) {
     $app->render('blog/archive.phtml', ['articles' => $articles, 'pages' => $pages, 'page' => $page]);
 })->conditions(['page' => '\d+'])->name('archive');
 
+$app->get('/feed', function () use ($app) {
+    $articles = $app->repository->fetchRecent(50);
+
+    $app->response->headers->set('Content-Type', 'application/rss+xml');
+    $app->render('blog/rss.phtml', ['articles' => $articles, 'layout' => false]);
+})->name('feed');
 
 /*
  * Search routes
