@@ -25,10 +25,6 @@ $app->get('/archive(/:page)', function ($page = 1) use ($app) {
     $app->render('blog/archive.phtml', ['articles' => $articles, 'pages' => $pages, 'page' => $page]);
 })->conditions(['page' => '\d+'])->name('archive');
 
-$app->get('/import', function () use ($app) {
-    $app->repository->import();
-    $app->redirect($app->urlFor('home'));
-});
 
 /*
  * Search routes
