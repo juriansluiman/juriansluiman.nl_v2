@@ -22,7 +22,7 @@ $app->get('/archive(/:page)', function ($page = 1) use ($app) {
     $articles = $app->repository->fetchOffset($from, $to);
 
     $app->render('blog/archive.phtml', ['articles' => $articles, 'pages' => $pages, 'page' => $page]);
-})->conditions(['page' => '\d+']);
+})->conditions(['page' => '\d+'])->name('archive');
 
 $app->get('/import', function () use ($app) {
     $app->repository->import();
