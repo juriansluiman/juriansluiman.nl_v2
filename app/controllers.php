@@ -14,11 +14,12 @@ $app->get('/article/:id(/:slug)', function ($id, $slug) use ($app) {
 })->conditions(['id' => '\d+'])->name('article');
 
 $app->get('/archive(/:page)', function ($page = 1) use ($app) {
+    $page     = (int) $page;
     $count    = $app->repository->getTotalCount();
     $perPage  = 25;
     $from     = ($page-1) * $perPage;
-    $to       = $page * $perPage;
-    $pages    = ceil($count/$perPage);
+    $to       = ($page * $perPage) - 1;
+    $pages    = (int) ceil($count/$perPage);
     $articles = $app->repository->fetchOffset($from, $to);
 
     $app->render('blog/archive.phtml', ['articles' => $articles, 'pages' => $pages, 'page' => $page]);
