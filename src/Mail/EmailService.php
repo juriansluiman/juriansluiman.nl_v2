@@ -2,18 +2,18 @@
 
 namespace App\Mail;
 
-use Slim\Slim;
+use Slim\View;
 use Mailgun\Mailgun;
 
 class EmailService
 {
-    protected $app;
+    protected $view;
     protected $transport;
     protected $config;
 
-    public function __construct(Slim $app, Mailgun $transport, array $config)
+    public function __construct(View $view, Mailgun $transport, array $config)
     {
-        $this->app       = $app;
+        $this->view      = $view;
         $this->transport = $transport;
         $this->config    = $config;
     }
@@ -21,7 +21,7 @@ class EmailService
     public function send($template, $data, $options)
     {
         $config = $this->config;
-        $html   = $this->app->view->fetch($template, $data + ['layout' => $template]);
+        $html   = $this->view->fetch($template, $data + ['layout' => $template]);
 
         return $this->transport->sendMessage($config['domain'], [
             'from'       => $config['from'],

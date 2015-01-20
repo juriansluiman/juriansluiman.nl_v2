@@ -28,5 +28,5 @@ $app->container->singleton('email', function () use ($app) {
     $config    = $app->config('email');
     $transport = new Mailgun\Mailgun($config['api_key']);
 
-    return new App\Mail\EmailService($app, $transport, $config);
+    return new App\Mail\EmailService($app->view, $transport, $config);
 });
