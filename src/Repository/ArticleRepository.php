@@ -17,7 +17,7 @@ class ArticleRepository
 
     public function getTotalCount()
     {
-        return $this->redis->llen($this->key('articles'));
+        return $this->redis->zcount($this->key('articles'), '-inf', '+inf');
     }
 
     public function fetchRecent($limit)
@@ -44,7 +44,7 @@ class ArticleRepository
 
     public function fetchOffset($start, $end)
     {
-        $articles = $this->redis->lRange($this->key('articles'), $start, $end);
+        $articles = $this->redis->zRevRange($this->key('articles'), $start, $end);
 
         $result = [];
         foreach ($articles as $id) {
@@ -56,7 +56,7 @@ class ArticleRepository
 
     public function persist(array $data)
     {
-        $id = $this->redis->lindex($this->key('articles'), -1);
+        $id = $this->redis->zRevRange($this->key('articles'), 0, 1);
         $id = $id ?: 1;
 
         $this->update($id, $data);
