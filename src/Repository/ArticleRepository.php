@@ -80,6 +80,15 @@ class ArticleRepository
         $article = $this->redis->set($this->key(self::KEY_ARTICLE . ':' . $id), json_encode($data + ['id' => $id]));
     }
 
+    public function publish($id, $time = null)
+    {
+        if (null === $time) {
+            $time = time();
+        }
+
+        $this->redis->zAdd($this->key(self::KEY_ARTICLES_PUBLISHED), $time, $id);
+    }
+
     private function key($name)
     {
         return sprintf('%s:%s', $this->prefix, $name);
