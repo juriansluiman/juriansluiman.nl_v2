@@ -6,7 +6,7 @@
 $title  = $title();
 $meta   = $meta();
 $script = $script();
-$desc   = strip_tags($article['lead']);
+$desc   = trim(strip_tags($article['lead']));
 
 $title($article['title']);
 $meta('description', $desc);
