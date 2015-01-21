@@ -163,6 +163,10 @@ blockquote {
     margin-right: 0.3rem;
 }
 
+.blog-article h2, .blog-article h3 {
+    margin-top: 5rem;
+}
+
 .blog-archive-listing {
     list-style-type: none;
     margin-left: 0;
