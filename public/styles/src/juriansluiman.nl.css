@@ -163,6 +163,55 @@ blockquote {
     margin-right: 0.3rem;
 }
 
+.blog-archive-listing {
+    list-style-type: none;
+    margin-left: 0;
+}
+
+.blog-archive-listing li:before {
+    content: '\00b7';
+    margin: 0 0.5em;
+}
+
+.blog-archive-publishdate {
+    font: normal small-caps 1.2em/1.35 "Minion W01 Regular",Georgia,serif
+}
+
+.blog-archive-title {
+    font: normal normal 1em/1.2em "Myriad W01 Lt",Helvetica,Verdana,sans-serif;
+}
+
+.blog-archive-title a {
+    text-decoration: none;
+}
+
+.blog-archive-paginator {
+    margin: 3rem 0;
+}
+
+.blog-archive-paginator a {
+    text-decoration: none;
+}
+
+.blog-archive-paginator .prev {
+    padding-left: 1rem;
+}
+
+.blog-archive-paginator .prev a:before {
+    margin-right: 1rem;
+    content: '\00ab';
+}
+
+.blog-archive-paginator .next {
+    padding-right: 1rem;
+    text-align: right;
+}
+
+.blog-archive-paginator .next a:after {
+    margin-left: 1rem;
+    content: '\00bb';
+}
+
 /**
  * About page styles
  */
