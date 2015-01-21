@@ -32,14 +32,14 @@ $app->hook('slim.before.router', function () use ($app) {
         return $result;
     });
 
-    $app->view->setData('script', function ($src = null, $script = null) {
+    $app->view->setData('script', function ($src = null, $script = null, $type = 'text/javascript') {
         static $result;
         $result = $result ?: '';
 
         if ($src) {
-            $result .= sprintf('<script type="text/javascript" src="%s"></script>' . PHP_EOL, $src);
+            $result .= sprintf('<script type="%s" src="%s"></script>' . PHP_EOL, $type, $src);
         } elseif ($script) {
-            $result .= sprintf('<script type="text/javascript">%s</script>'. PHP_EOL, $script);
+            $result .= sprintf('<script type="%s">%s</script>'. PHP_EOL, $type, $script);
         }
 
         return $result;
