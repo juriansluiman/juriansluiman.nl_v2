@@ -13,7 +13,7 @@ class ArticleRepository
     protected $redis;
     protected $prefix;
 
-    public function __construct(Redis $redis, $prefix)
+    public function __construct(Redis $redis, $prefix = '')
     {
         $this->redis  = $redis;
         $this->prefix = $prefix;
