@@ -42,6 +42,59 @@ $app->get('/search', function () use ($app) {
     $app->render('search/results.phtml', ['query' => $query, 'key' => $config['key'], 'cx' => $config['cx']]);
 })->name('search');
 
+$app->get('/import', function () use ($app) {
+    if (!file_exists('data/articles_nl.php') || !file_exists('data/articles_en.php')) {
+        echo "No files to import";
+        return;
+    }
+
+    $dutch   = include 'data/articles_nl.php';
+    $english = include 'data/articles_en.php';
+
+    $articles    = [];
+    $unpublished = [];
+    foreach (array_merge($dutch, $english) as $entry) {
+        $article = [
+            'id'    => (int) $entry['id'],
+            'date'  => DateTime::createFromFormat('Y-m-d H:i:s', $entry['publish_date']),
+            'title' => $entry['title'],
+            'lead'  => $entry['lead'],
+            'body'  => $entry['body'],
+            'lang'  => $entry['locale'],
+        ];
+
+        // We overwrite Dutch articles with English ones when they both exists
+        if ($article['date']) {
+            $articles[$article['id']] = $article;
+        } else {
+            $unpublished[$article['id']] = $article;
+        }
+    }
+
+    usort($articles, function ($a, $b) {
+        $aDate = $a['date'];
+        $bDate = $b['date'];
+
+        if ($aDate == $bDate) {
+            return 0;
+        }
+        return ($aDate < $bDate) ? -1 : 1;
+    });
+
+    $repository = $app->repository;
+    $repository->purge();
+
+    foreach ($articles as $article) {
+        if ($article['date']) {
+            $article['date'] = $article['date']->format('U');
+        }
+        $repository->update($article['id'], $article);
+        $repository->publish($article['id'], $article['date']);
+    }
+
+    $app->redirect($app->urlFor('home'));
+});
+
 /*
  * Static routes
  */
