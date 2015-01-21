@@ -6,6 +6,10 @@ use Redis;
 
 class ArticleRepository
 {
+    const KEY_ARTICLES_PUBLISHED = 'articles:published';
+    const KEY_ARTICLES_CONCEPT   = 'articles:concept';
+    const KEY_ARTICLE            = 'article';
+
     protected $redis;
     protected $prefix;
 
@@ -17,7 +21,7 @@ class ArticleRepository
 
     public function getTotalCount()
     {
-        return $this->redis->zcount($this->key('articles'), '-inf', '+inf');
+        return $this->redis->zcount($this->key(self::KEY_ARTICLES_PUBLISHED), '-inf', '+inf');
     }
 
     public function fetchRecent($limit)
@@ -27,8 +31,7 @@ class ArticleRepository
 
     public function fetchArticle($id)
     {
-        $key = $this->key('article:' . $id);
-        $article = $this->redis->get($this->key('article:' . $id));
+        $article = $this->redis->get($this->key(self::KEY_ARTICLE . ':' . $id));
 
         if (!$article) {
             return false;
@@ -44,11 +47,11 @@ class ArticleRepository
 
     public function fetchOffset($start, $end)
     {
-        $articles = $this->redis->zRevRange($this->key('articles'), $start, $end);
+        $articles = $this->redis->zRevRange($this->key(self::KEY_ARTICLES_PUBLISHED), $start, $end);
 
         $result = [];
         foreach ($articles as $id) {
-            $result[] = json_decode($this->redis->get($this->key('article:' . $id)), true);
+            $result[] = json_decode($this->redis->get($this->key(self::KEY_ARTICLE . ':'. $id)), true);
         }
 
         return $result;
@@ -56,7 +59,7 @@ class ArticleRepository
 
     public function persist(array $data)
     {
-        $id = $this->redis->zRevRange($this->key('articles'), 0, 1);
+        $id = $this->redis->zRevRange($this->key(self::KEY_ARTICLES_PUBLISHED), 0, 1);
         $id = $id ?: 1;
 
         $this->update($id, $data);
@@ -66,7 +69,7 @@ class ArticleRepository
     public function update($id, array $data)
     {
         $key     = $this->key('article:' . $id);
-        $article = $this->redis->set($this->key('article:' . $id), json_encode($data + ['id' => $id]));
+        $article = $this->redis->set($this->key(self::KEY_ARTICLE . ':' . $id), json_encode($data + ['id' => $id]));
     }
 
     private function key($name)
