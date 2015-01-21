@@ -57,6 +57,14 @@ class ArticleRepository
         return $result;
     }
 
+    public function purge()
+    {
+        $keys = $this->redis->keys($this->prefix . ':*');
+        foreach ($keys as $key) {
+            $this->redis->del($key);
+        }
+    }
+
     public function persist(array $data)
     {
         $id = $this->redis->zRevRange($this->key(self::KEY_ARTICLES_PUBLISHED), 0, 1);
