@@ -246,7 +246,6 @@ blockquote {
  * Prism style override
  */
 pre code {
-    line-height: 1.2;
     font-size: 1.6rem;
     font-family: 'Source Code Pro', monospace;
 
