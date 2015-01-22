@@ -2,17 +2,13 @@
 /**
  * Layout
  */
-// Hack, see http://help.slimframework.com/discussions/questions/4686-slimviewsetdata-protects-closures
-$title  = $title();
-$meta   = $meta();
-$script = $script();
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title><?= $title('Jurian Sluiman', false)?></title>
-    <?= $meta() ?>
+    <title><?= $title->append('Jurian Sluiman')?></title>
+    <?= $meta ?>
     <meta name="copyright" content="Jurian Sluiman 2006-2015">
     <meta name="generator" content="http://github.com/juriansluiman.nl">
     <meta name="viewport"  content="width=device-width, initial-scale=1">
@@ -34,7 +30,7 @@ $script = $script();
         </ul>
     </footer>
 
-    <?= $script(null, <<<SCRIPT
+    <?= $script->append(null, <<<SCRIPT
 WebFontConfig = {
   google: { families: [ 'Source Code Pro' ] }
 };

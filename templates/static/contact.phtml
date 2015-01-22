@@ -2,9 +2,7 @@
 /**
  * Contact page
  */
-// Hack, see http://help.slimframework.com/discussions/questions/4686-slimviewsetdata-protects-closures
-$title  = $title();
-$title('Contact me');
+$title->prepend('Contact me');
 ?>
 <section>
     <h1>

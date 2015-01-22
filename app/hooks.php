@@ -6,44 +6,9 @@ $app->hook('slim.before.router', function () use ($app) {
     $app->view()->setData('app', $app);
 
     // Inject helpers to the view for title, metadata and javascript
-    $app->view()->setData('title', function ($title = null, $prepend = true) {
-        static $result;
-        $result = $result ?: [];
-
-        if ($title) {
-            if ($prepend) {
-                array_unshift($result, $title);
-            } else {
-                array_push($result, $title);
-            }
-        }
-
-        return implode(' &middot; ', $result);
-    });
-
-    $app->view()->setData('meta', function ($name = null, $content = null) {
-        static $result;
-        $result = $result ?: '';
-
-        if ($name && $content) {
-            $result .= sprintf('<meta name="%s" content="%s">' . PHP_EOL, $name, $content);
-        }
-
-        return $result;
-    });
-
-    $app->view->setData('script', function ($src = null, $script = null, $type = 'text/javascript') {
-        static $result;
-        $result = $result ?: '';
-
-        if ($src) {
-            $result .= sprintf('<script type="%s" src="%s"></script>' . PHP_EOL, $type, $src);
-        } elseif ($script) {
-            $result .= sprintf('<script type="%s">%s</script>'. PHP_EOL, $type, $script);
-        }
-
-        return $result;
-    });
+    $app->view()->setData('title', new App\View\Helper\Title(' &middot; '));
+    $app->view()->setData('meta', new App\View\Helper\Meta);
+    $app->view()->setData('script', new App\View\Helper\Script);
 });
 
 // If /article/:id/:slug is requested, check the slug and redirect if required

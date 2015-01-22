@@ -2,9 +2,7 @@
 /**
  * About page
  */
-// Hack, see http://help.slimframework.com/discussions/questions/4686-slimviewsetdata-protects-closures
-$title  = $title();
-$title('About me');
+$title->prepend('About me');
 ?>
 <section itemscope itemtype="http://schema.org/Person">
     <h1>
