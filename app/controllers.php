@@ -131,6 +131,23 @@ $app->get('/login', function () use ($app) {
         $app->redirect($app->urlFor('admin'));
     }
 
+    $csrf = Zend\Math\Rand::getString(20);
+    $app->session->csrf = $csrf;
+
+    $app->render('auth/login-form.phtml', ['csrf' => $csrf]);
+});
+
+$app->post('/login', function () use ($app) {
+    if ($app->session->admin === true) {
+        $app->redirect($app->urlFor('admin'));
+    }
+
+    $csrf = $app->request->post('csrf');
+    if ($app->session->csrf !== $csrf) {
+        $app->redirect($app->urlFor('home'));
+    }
+    $app->session->offsetUnset('csrf');
+
     $token  = Zend\Math\Rand::getString(20);
     $token  = str_replace(['+', '/'], '@', $token);
     $config = $app->config('auth');
@@ -138,7 +155,7 @@ $app->get('/login', function () use ($app) {
     $app->session->token = $token;
     $app->email->send('auth/email.phtml', ['token' => $token], $config + ['subject' => 'Login token for juriansluiman.nl']);
 
-    $app->render('auth/login.phtml');
+    $app->render('auth/token-sent.phtml');
 })->name('login');
 
 $app->get('/authenticate/:token', function ($token) use ($app) {
