@@ -67,7 +67,7 @@ class ArticleRepository
 
     public function persist(array $data)
     {
-        $id = $this->redis->zRevRange($this->key(self::KEY_ARTICLES_PUBLISHED), 0, 1);
+        $id = (int) $this->redis->zRevRange($this->key(self::KEY_ARTICLES_PUBLISHED), 0, 0)[0] + 1;
         $id = $id ?: 1;
 
         $this->update($id, $data);
