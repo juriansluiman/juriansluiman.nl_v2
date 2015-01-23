@@ -189,7 +189,7 @@ $app->post('/logout', $authentication, function () use ($app) {
  * Admin routes
  */
 $app->get('/admin', $authentication, function () use ($app) {
-    $app->render('admin/dashboard.phtml');
+    $app->render('admin/dashboard.phtml', ['layout' => 'admin/layout.phtml']);
 })->name('admin');
 
 $app->group('/admin', $authentication, function () use ($app) {
