@@ -89,6 +89,12 @@ class ArticleRepository
         $this->redis->zAdd($this->key(self::KEY_ARTICLES_PUBLISHED), $time, $id);
     }
 
+    public function remove($id)
+    {
+        $this->redis->zRem($this->key(self::KEY_ARTICLES_PUBLISHED), $id);
+        $this->redis->del($this->key(self::KEY_ARTICLE . ':' . $id));
+    }
+
     private function key($name)
     {
         return sprintf('%s:%s', $this->prefix, $name);
