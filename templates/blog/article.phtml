@@ -28,5 +28,5 @@ $script->append('/scripts/src/comments.js', null, 'text/jsx');
 
     <?= $article['lead']?>
     <span id="body"></span>
-    <?= $article['body']?>
+    <?= isset($article['body']) ? $article['body'] : ''?>
 </article>
