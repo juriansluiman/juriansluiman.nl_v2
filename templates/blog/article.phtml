@@ -18,7 +18,7 @@ $script->append('//code.jquery.com/jquery-1.10.0.min.js');
 $script->append('//cdnjs.cloudflare.com/ajax/libs/showdown/0.3.1/showdown.min.js');
 $script->append('/scripts/src/comments.js', null, 'text/jsx');
 ?>
-<article itemscope itemtype="http://schema.org/BlogPosting">
+<article itemscope itemtype="http://schema.org/BlogPosting" class="blog-article" id="content">
     <header>
         <h1 itemprop="name" class="blog-article-title">
             <a href="<?= $app->urlFor('article', ['id' => $article['id']])?>" itemprop="url"><?= $article['title']?></a>
