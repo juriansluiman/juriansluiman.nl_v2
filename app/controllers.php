@@ -142,27 +142,30 @@ $app->post('/login', function () use ($app) {
         $app->redirect($app->urlFor('admin'));
     }
 
+    // Validate CSRF
     $csrf = $app->request->post('csrf');
     if ($app->session->csrf !== $csrf) {
         $app->redirect($app->urlFor('home'));
     }
     $app->session->offsetUnset('csrf');
 
+    // Generate token
     $token  = Zend\Math\Rand::getString(20);
-    $config = $app->config('auth');
+    $app->session->token = $token;
 
     // Get some more context for the user
     $time = new DateTime;
+    $ip   = $app->request->getIp();
     try {
-        $ip      = $app->request->getIp();
         $address = $app->geocoder->city($ip);
     } catch (GeoIp2\Exception\AddressNotFoundException $e) {
         // Silently ignore not found addresses
         $address = null;
     }
 
-    $app->session->token = $token;
-    $app->email->send('auth/email.phtml', ['token' => $token, 'address' => $address, 'time' => $time], $config + ['subject' => 'Login token for juriansluiman.nl']);
+    // Send the login email
+    $config = $app->config('auth');
+    $app->email->send('auth/email.phtml', ['token' => $token, 'address' => $address, 'time' => $time], $config);
 
     $app->render('auth/token-sent.phtml');
 })->name('login');
