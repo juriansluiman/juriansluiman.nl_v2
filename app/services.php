@@ -30,3 +30,10 @@ $app->container->singleton('email', function () use ($app) {
 
     return new App\Mail\EmailService($app->view, $transport, $config);
 });
+
+$app->container->singleton('geocoder', function () use ($app) {
+    $config   = $app->config('geoip');
+    $geocoder = new GeoIp2\Database\Reader($config['path']);
+
+    return $geocoder;
+});

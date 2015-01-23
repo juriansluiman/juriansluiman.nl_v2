@@ -152,8 +152,18 @@ $app->post('/login', function () use ($app) {
     $token  = str_replace(['+', '/'], '@', $token);
     $config = $app->config('auth');
 
+    // Get some more context for the user
+    $time = new DateTime;
+    try {
+        $ip      = $app->request->getIp();
+        $address = $app->geocoder->city($ip);
+    } catch (GeoIp2\Exception\AddressNotFoundException $e) {
+        // Silently ignore not found addresses
+        $address = null;
+    }
+
     $app->session->token = $token;
-    $app->email->send('auth/email.phtml', ['token' => $token], $config + ['subject' => 'Login token for juriansluiman.nl']);
+    $app->email->send('auth/email.phtml', ['token' => $token, 'address' => $address, 'time' => $time], $config + ['subject' => 'Login token for juriansluiman.nl']);
 
     $app->render('auth/token-sent.phtml');
 })->name('login');

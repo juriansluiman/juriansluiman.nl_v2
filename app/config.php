@@ -21,6 +21,9 @@ $config = [
         'key' => '',
         'cx'  => '',
     ],
+    'geoip' => [
+        'path' => '',
+    ],
 ];
 
 if (file_exists('app/config.local.php')) {
