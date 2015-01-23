@@ -210,7 +210,7 @@ $app->group('/admin', $authentication, function () use ($app) {
             $id   = $app->repository->persist($data);
 
             $app->flash('success', 'A new blog post has been created!');
-            $app->redirect($app->urlFor('admin-blog-edit'), ['id' => $id]);
+            $app->redirect($app->urlFor('admin-blog-edit', ['id' => $id]));
         });
 
         $app->get('/:id', function ($id) use ($app) {
@@ -225,7 +225,7 @@ $app->group('/admin', $authentication, function () use ($app) {
             $id   = $app->repository->update($id, $data);
 
             $app->flash('success', 'Your blog post has been saved!');
-            $app->redirect($app->urlFor('admin-blog-edit'), ['id' => $id]);
+            $app->redirect($app->urlFor('admin-blog-edit', ['id' => $id]));
         });
 
         $app->delete('/:id', function ($id) use ($app) {
