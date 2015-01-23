@@ -149,7 +149,6 @@ $app->post('/login', function () use ($app) {
     $app->session->offsetUnset('csrf');
 
     $token  = Zend\Math\Rand::getString(20);
-    $token  = str_replace(['+', '/'], '@', $token);
     $config = $app->config('auth');
 
     // Get some more context for the user
