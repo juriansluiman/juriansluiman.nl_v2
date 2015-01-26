@@ -30,7 +30,14 @@
         </ul>
     </footer>
 
-    <?= $script->append(null, <<<SCRIPT
+    <?php
+    if (count($flash)) {
+        foreach ($flash->getMessages() as $message) {
+            $script->append(null, sprintf('humane.log("%s")', $message));
+        }
+    }
+
+    echo $script->prepend('/scripts/dist/main.js')->append(null, <<<SCRIPT
 WebFontConfig = {
   google: { families: [ 'Source Code Pro' ] }
 };

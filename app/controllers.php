@@ -122,12 +122,14 @@ $app->notFound(function () use ($app) {
  */
 $authentication = function () use ($app) {
     if (true !== $app->session->admin) {
+        $app->flash('info', 'You do not have access to the page ' . $app->request->getPath());
         $app->redirect($app->urlFor('home'));
     }
 };
 
 $app->get('/login', function () use ($app) {
     if ($app->session->admin === true) {
+        $app->flash('info', 'You are already logged in');
         $app->redirect($app->urlFor('admin'));
     }
 
@@ -139,12 +141,14 @@ $app->get('/login', function () use ($app) {
 
 $app->post('/login', function () use ($app) {
     if ($app->session->admin === true) {
+        $app->flash('info', 'You are already logged in');
         $app->redirect($app->urlFor('admin'));
     }
 
     // Validate CSRF
     $csrf = $app->request->post('csrf');
     if ($app->session->csrf !== $csrf) {
+        $app->flash('info', 'Could not login due to mismatch in CSRF token');
         $app->redirect($app->urlFor('home'));
     }
     $app->session->offsetUnset('csrf');
@@ -173,6 +177,7 @@ $app->post('/login', function () use ($app) {
 $app->get('/authenticate/:token', function ($token) use ($app) {
     $session = $app->session;
     if (!isset($session->token) || $token !== $app->session->token) {
+        $app->flash('info', 'Invalid login token received');
         $app->redirect($app->urlFor('home'));
     }
 
@@ -180,11 +185,13 @@ $app->get('/authenticate/:token', function ($token) use ($app) {
     $session->admin = true;
     unset($app->session->token);
 
+    $app->flash('info', 'You are now logged in');
     $app->redirect($app->urlFor('admin'));
 })->name('authenticate');
 
 $app->post('/logout', $authentication, function () use ($app) {
     unset($app->session->admin);
+    $app->flash('info', 'You are now logged out');
     $app->redirect($app->urlFor('home'));
 })->name('logout');
 
