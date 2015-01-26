@@ -14,7 +14,7 @@ class Script extends AbstractContainer
         $result = '';
         foreach ($this->container as $item) {
             if (!is_array($item)) {
-                continue;
+                $item = (array) $item;
             }
 
             // Third argument was optional
