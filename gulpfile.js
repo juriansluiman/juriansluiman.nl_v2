@@ -11,16 +11,6 @@ gulp.task('styles', function () {
         .pipe(minify())
         .pipe(chmod(644))
         .pipe(gulp.dest('public/styles/dist/'));
-
-    gulp.src('public/styles/src/prism.css')
-        .pipe(minify())
-        .pipe(chmod(644))
-        .pipe(gulp.dest('public/styles/dist/'));
-
-    gulp.src('public/styles/src/admin.css')
-        .pipe(minify())
-        .pipe(chmod(644))
-        .pipe(gulp.dest('public/styles/dist/'));
 });
 
 gulp.task('scripts', function () {
