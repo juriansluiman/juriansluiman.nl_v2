@@ -2,6 +2,7 @@ var gulp   = require('gulp'),
     concat = require('gulp-concat');
     minify = require('gulp-minify-css'),
     uglify = require('gulp-uglify'),
+    riot   = require('gulp-riot'),
     chmod  = require('gulp-chmod'),
     watch  = require('gulp-watch');
 
@@ -19,6 +20,12 @@ gulp.task('scripts', function () {
         .pipe(uglify())
         .pipe(chmod(644))
         .pipe(gulp.dest('public/scripts/dist/'));
+
+    gulp.src('public/scripts/src/*.tag')
+        .pipe(riot())
+        .pipe(uglify())
+        .pipe(chmod(644))
+        .pipe(gulp.dest('public/scripts/dist'));
 })
 
 gulp.task('default', ['styles', 'scripts']);
