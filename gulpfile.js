@@ -14,7 +14,7 @@ gulp.task('styles', function () {
 });
 
 gulp.task('scripts', function () {
-    gulp.src(['public/scripts/src/fonts.js', 'public/scripts/src/prism.js', 'public/bower_components/lodash/lodash.js', 'public/bower_components/humane-js/humane.js'])
+    gulp.src(['public/scripts/src/*.js', 'public/bower_components/lodash/lodash.js', 'public/bower_components/humane-js/humane.js'])
         .pipe(concat('main.js'))
         .pipe(uglify())
         .pipe(chmod(644))
