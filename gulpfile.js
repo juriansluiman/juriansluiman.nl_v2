@@ -7,7 +7,14 @@ var gulp   = require('gulp'),
     watch  = require('gulp-watch');
 
 gulp.task('styles', function () {
-    gulp.src(['public/bower_components/normalize.css/normalize.css', 'public/bower_components/humane-js/themes/libnotify.css', 'public/bower_components/skeleton-css/css/skeleton.css', 'public/styles/fonts/fonts.css', 'public/styles/src/juriansluiman.nl.css'])
+    var styles = [
+        'public/bower_components/normalize.css/normalize.css',
+        'public/bower_components/humane-js/themes/libnotify.css',
+        'public/bower_components/skeleton-css/css/skeleton.css',
+        'public/styles/fonts/fonts.css',
+        'public/styles/src/juriansluiman.nl.css'
+    ];
+    gulp.src(styles)
         .pipe(concat('styles.css'))
         .pipe(minify())
         .pipe(chmod(644))
@@ -15,7 +22,12 @@ gulp.task('styles', function () {
 });
 
 gulp.task('scripts', function () {
-    gulp.src(['public/scripts/src/*.js', 'public/bower_components/lodash/lodash.js', 'public/bower_components/humane-js/humane.js'])
+    var scripts = [
+        'public/scripts/src/*.js',
+        'public/bower_components/lodash/lodash.js',
+        'public/bower_components/humane-js/humane.js'
+    ];
+    gulp.src(scripts)
         .pipe(concat('main.js'))
         .pipe(uglify())
         .pipe(chmod(644))
