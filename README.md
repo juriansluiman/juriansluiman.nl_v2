@@ -18,3 +18,10 @@ Install composer, run `composer install`. Next, install Bower and Gulp and run
 files.
 
 If your webserver is set up correctly, the site should display just fine.
+
+Considerations
+---
+The site is using Slim, ran via the `app.php` in the root of this project. All
+endpoints are defined in `app/controllers.php`. Feel free to have a look around.
+
+The blog articles are stored in Redis, a fast and powerful key-value store.
