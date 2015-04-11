@@ -12,6 +12,7 @@ gulp.task('styles', function () {
         'public/bower_components/humane-js/themes/libnotify.css',
         'public/bower_components/skeleton-css/css/skeleton.css',
         'public/styles/fonts/fonts.css',
+        'public/styles/src/font-awesome.css',
         'public/styles/src/juriansluiman.nl.css'
     ];
     gulp.src(styles)
