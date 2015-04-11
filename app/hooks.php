@@ -34,3 +34,13 @@ $app->hook('slim.before.dispatch', function () use ($app) {
 
     $app->article = $article;
 });
+
+// Create variable in layout when user is authenticated
+$app->hook('slim.before.dispatch', function () use ($app) {
+    $route = $app->router()->getCurrentRoute();
+    if (strpos($route->getName(), 'admin') === 0) {
+        return;
+    }
+
+    $app->view()->setData('admin', (bool) $app->session->admin);
+});
