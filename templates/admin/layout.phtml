@@ -21,39 +21,10 @@
             <a href="<?= $app->urlFor('admin-blog-create')?>">create article</a>
             <a href="<?= $app->urlFor('home')?>" target="_blank">back home &#8625;</a>
         </nav>
-    </footer>
+    </div>
 
-    <script type="text/javascript">
-    //<!--
-    /*var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-3615149-2']);
-    _gaq.push(['_trackPageview']);
-    (function () {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();*/
+    <main role="main" class="container"><?= $yield?></main>
 
-        //-->
-    </script>
-    <script type="text/javascript" src="/scripts/prism.js?59d8aab"></script>
-    <script type="text/javascript">
-        //<!--
-        WebFontConfig = {
-      google: { families: [ 'Source Code Pro' ] }
-    };
-
-    (function () {
-      var wf = document.createElement('script');
-      wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
-               '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
-      wf.type = 'text/javascript';
-      wf.async = 'true';
-
-      var s = document.getElementsByTagName('script')[0];
-      s.parentNode.insertBefore(wf, s);
-    })();
-        //-->
-    </script>
+    <?=  $script->prepend('/scripts/dist/admin.js') ?>
 </body>
 </html>

@@ -34,6 +34,16 @@ gulp.task('scripts', function () {
         .pipe(chmod(644))
         .pipe(gulp.dest('public/scripts/dist/'));
 
+    var scripts = [
+        'public/scripts/src/fonts.js',
+        'node_modules/medium-editor/src/js/medium-editor.js'
+    ];
+    gulp.src(scripts)
+        .pipe(concat('admin.js'))
+        //.pipe(uglify())
+        .pipe(chmod(644))
+        .pipe(gulp.dest('public/scripts/dist'));
+
     gulp.src('public/scripts/src/*.tag')
         .pipe(riot())
         .pipe(uglify())

@@ -302,3 +302,48 @@ pre {
         width: 20%;
     }
 }
+
+/***
+
+  ADMIN
+
+***/
+
+.admin-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    width: 100%;
+    z-index: 2;
+    height: 3em;
+    padding: .5em;
+    background-color: #222;
+    color: white;
+    border-bottom: 1px solid white;
+    font-size: .9em;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.admin-bar nav {
+    display: block;
+    margin: 0 auto;
+    width: 575px;
+    font-family: 'Myriad W01 Lt', Helvetica, Verdana, sans-serif;
+    letter-spacing: 0;
+}
+.admin-bar .logo {
+  height: 2em;
+  vertical-align: middle;
+  margin-right: 1rem;
+}
+.admin-bar a {
+    color: white;
+    text-decoration: none;
+}
+.admin-bar a:not(:first-child) {
+    margin-left: 2em;
+}
+.admin-bar + * {
+    margin-top: 3em;
+}
