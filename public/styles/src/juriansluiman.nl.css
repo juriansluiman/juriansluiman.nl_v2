@@ -217,6 +217,42 @@ blockquote {
 }
 
 /**
+
+/**
+ * Search
+*/
+
+.search-query {
+    width: 100%;
+    padding-top: 0.6rem;
+}
+.search-waiter {
+    width: 100%;
+    margin: 0 auto 1em;
+    text-align: center;
+}
+.search-results {
+    margin-left: 0;
+    list-style: none;
+}
+.search-results li {
+    margin-bottom: 3rem;
+    line-height: 1;
+}
+.search-results a {
+    text-decoration: none;
+}
+.search-results .search-link {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 1.5rem;
+    color: #999;
+}
+.search-results b {
+    font-weight: normal;
+}
+
+/**
  * About page styles
  */
 

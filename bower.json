@@ -5,6 +5,7 @@
     "normalize.css": "~3.0",
     "skeleton-css": "~2.0",
     "lodash": "~3.0",
-    "humane-js": "3.2"
+    "humane-js": "3.2",
+    "riot": "~2.0"
   }
 }

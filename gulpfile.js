@@ -4,7 +4,8 @@ var gulp   = require('gulp'),
     uglify = require('gulp-uglify'),
     riot   = require('gulp-riot'),
     chmod  = require('gulp-chmod'),
-    watch  = require('gulp-watch');
+    watch  = require('gulp-watch')
+    gulpif = require('gulp-if');
 
 gulp.task('styles', function () {
     var styles = [
@@ -44,9 +45,10 @@ gulp.task('scripts', function () {
         .pipe(chmod(644))
         .pipe(gulp.dest('public/scripts/dist'));
 
-    gulp.src('public/scripts/src/*.tag')
-        .pipe(riot())
-        .pipe(uglify())
+    gulp.src(['public/bower_components/riot/riot.js', 'public/scripts/src/*.tag'])
+        .pipe(gulpif('*.tag', riot()))
+        //.pipe(uglify())
+        .pipe(concat('riot.js'))
         .pipe(chmod(644))
         .pipe(gulp.dest('public/scripts/dist'));
 })

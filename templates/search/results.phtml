@@ -6,56 +6,10 @@
 <h1><a href="<?= $app->urlFor('home')?>">Jurian Sluiman &middot; search</a></h1>
 
 <section itemscope itemtype="http://schema.org/SearchResultsPage">
-    <form method="get" action="<?= $app->urlFor('search')?>">
-        <input type="text" name="q" placeholder="What are you looking for?" value="<?= $query ?>" class="search-query">
-    </form>
-    <ul id="search-results"></ul>
+    <search></search>
 </section>
 
-<?php if ($query):?>
-<script>
-function hndlr(response) {
-    for (var i = 0; i < response.items.length; i++) {
-        var item = response.items[i];
-
-        if (item.link == 'https://juriansluiman.nl/') continue; // do not show the homepage
-        document.getElementById("search-results").innerHTML += '<li><a href="' + item.link + '">' + item.title.split('·')[0] + '<br><span class="search-link">' + item.link + '</span></a></li>';
-    }
-}
-(function() {
-    var gcse   = document.createElement('script');
-    gcse.type  = 'text/javascript';
-    gcse.async = true;
-    gcse.src   = 'https://www.googleapis.com/customsearch/v1?callback=hndlr&fields=items(title,link)&prettyPrint=false&key=<?= $key ?>&cx=<?= $cx ?>&q=<?= $query ?>';
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(gcse, s);
-})();
-</script>
-<?php endif ?>
-
-<style>
-.search-query {
-    width: 100%;
-    padding-top: 0.6rem;
-}
-#search-results {
-    margin-left: 0;
-    list-style: none;
-}
-#search-results li {
-    margin-bottom: 3rem;
-    line-height: 1;
-}
-#search-results a {
-    text-decoration: none;
-}
-#search-results .search-link {
-    display: block;
-    margin-top: 0.5rem;
-    font-size: 1.5rem;
-    color: #999;
-}
-b {
-    font-weight: normal;
-}
-</style>
+<?
+$script->append('/scripts/dist/riot.js')
+       ->append(null, "riot.mount('search', {url: '" . $app->urlFor('search') . "', query: '" . $query . "', config: {key: '" . $key . "', cx: '" . $cx . "'}})")
+?>
