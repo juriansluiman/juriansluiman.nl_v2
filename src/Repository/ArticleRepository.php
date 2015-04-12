@@ -9,6 +9,7 @@ class ArticleRepository
     const KEY_ARTICLES_PUBLISHED = 'articles:published';
     const KEY_ARTICLES_CONCEPT   = 'articles:concept';
     const KEY_ARTICLE            = 'article';
+    const KEY_ARTICLE_NEXT_ID    = 'article:next_id';
 
     protected $redis;
     protected $prefix;
@@ -67,7 +68,7 @@ class ArticleRepository
 
     public function persist(array $data)
     {
-        $id = (int) $this->redis->zRevRange($this->key(self::KEY_ARTICLES_PUBLISHED), 0, 0)[0] + 1;
+        $id = (int) $this->redis->incr($this->key(self::KEY_ARTICLE_NEXT_ID));
         $id = $id ?: 1;
 
         $this->update($id, $data);
