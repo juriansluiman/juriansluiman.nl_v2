@@ -13,10 +13,10 @@ $config = [
         'api_key' => '',
         'domain'  => '',
         'from'    => '',
-        'subject' => '',
     ],
     'auth' => [
-        'to' => '',
+        'subject' => '',
+        'to'      => '',
     ],
     'search' => [
         'key' => '',
