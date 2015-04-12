@@ -38,7 +38,7 @@
 
     echo $script->prepend('/scripts/dist/main.js') ?>
 
-    <?php if ($admin):?>
+    <?php if (isset($admin) && $admin):?>
         <div style="position: fixed; right: 0.3em; bottom: 0.3em;"><a href="<?= $app->urlFor('admin')?>"><img src="/styles/icons/admin-icon.svg" class="logo" style="height: 2em;"></a></div>
     <?php endif ?>
 </body>
