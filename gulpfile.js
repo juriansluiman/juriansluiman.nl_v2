@@ -1,4 +1,5 @@
-var gulp   = require('gulp'),
+var argv   = require('yargs').argv,
+    gulp   = require('gulp'),
     concat = require('gulp-concat');
     minify = require('gulp-minify-css'),
     uglify = require('gulp-uglify'),
@@ -18,12 +19,13 @@ gulp.task('styles', function () {
     ];
     gulp.src(styles)
         .pipe(concat('styles.css'))
-        .pipe(minify())
+        .pipe(gulpif(argv.production, minify()))
         .pipe(chmod(644))
         .pipe(gulp.dest('public/styles/dist/'));
 });
 
 gulp.task('scripts', function () {
+    // Frontpage scripts
     var scripts = [
         'public/scripts/src/*.js',
         'public/bower_components/lodash/lodash.js',
@@ -31,23 +33,24 @@ gulp.task('scripts', function () {
     ];
     gulp.src(scripts)
         .pipe(concat('main.js'))
-        .pipe(uglify())
+        .pipe(gulpif(argv.production, uglify()))
         .pipe(chmod(644))
         .pipe(gulp.dest('public/scripts/dist/'));
 
+    // Admin scripts
     var scripts = [
         'public/scripts/src/fonts.js',
         'node_modules/medium-editor/src/js/medium-editor.js'
     ];
     gulp.src(scripts)
         .pipe(concat('admin.js'))
-        //.pipe(uglify())
+        .pipe(gulpif(argv.production, uglify()))
         .pipe(chmod(644))
         .pipe(gulp.dest('public/scripts/dist'));
 
     gulp.src(['public/bower_components/riot/riot.js', 'public/scripts/src/*.tag'])
         .pipe(gulpif('*.tag', riot()))
-        //.pipe(uglify())
+        .pipe(gulpif(argv.production, uglify()))
         .pipe(concat('riot.js'))
         .pipe(chmod(644))
         .pipe(gulp.dest('public/scripts/dist'));
