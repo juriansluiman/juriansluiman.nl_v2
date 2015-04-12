@@ -84,13 +84,21 @@ $app->get('/import', function () use ($app) {
     $repository = $app->repository;
     $repository->purge();
 
+    $nextId = 0;
     foreach ($articles as $article) {
+        if ($article['id'] > $nextId) {
+            $nextId = $article['id'] + 1;
+        }
+
         if ($article['date']) {
             $article['date'] = $article['date']->format('U');
         }
         $repository->update($article['id'], $article);
         $repository->publish($article['id'], $article['date']);
     }
+
+    $config = $app->config('redis');
+    $app->redis->set($config['prefix'] . ':article:next_id', $nextId);
 
     $app->redirect($app->urlFor('home'));
 });
