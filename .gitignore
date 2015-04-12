@@ -3,6 +3,7 @@ vendor/
 node_modules/
 public/bower_components/
 public/styles/dist/
+public/styles/fonts/
 public/scripts/dist/
 public/assets/
 app/config.local.php
