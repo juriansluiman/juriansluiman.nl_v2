@@ -10,9 +10,9 @@ var argv   = require('yargs').argv,
 
 gulp.task('styles', function () {
     var styles = [
-        'public/bower_components/normalize.css/normalize.css',
-        'public/bower_components/humane-js/themes/libnotify.css',
-        'public/bower_components/skeleton-css/css/skeleton.css',
+        'node_modules/normalize.css/normalize.css',
+        'node_modules/humane-js/themes/libnotify.css',
+        'node_modules/skeleton.css/skeleton.css',
         'public/styles/fonts/fonts.css',
         'public/styles/src/font-awesome.css',
         'public/styles/src/juriansluiman.nl.css'
@@ -28,8 +28,8 @@ gulp.task('scripts', function () {
     // Frontpage scripts
     var scripts = [
         'public/scripts/src/*.js',
-        'public/bower_components/lodash/lodash.js',
-        'public/bower_components/humane-js/humane.js'
+        'node_modules/lodash/index.js',
+        'node_modules/humane-js/humane.js'
     ];
     gulp.src(scripts)
         .pipe(concat('main.js'))
@@ -40,7 +40,7 @@ gulp.task('scripts', function () {
     // Admin scripts
     var scripts = [
         'public/scripts/src/fonts.js',
-        'node_modules/medium-editor/src/js/medium-editor.js'
+        'node_modules/medium-editor/dist/js/medium-editor.js'
     ];
     gulp.src(scripts)
         .pipe(concat('admin.js'))
@@ -48,7 +48,7 @@ gulp.task('scripts', function () {
         .pipe(chmod(644))
         .pipe(gulp.dest('public/scripts/dist'));
 
-    gulp.src(['public/bower_components/riot/riot.js', 'public/scripts/src/*.tag'])
+    gulp.src(['node_modules/riot/riot.js', 'public/scripts/src/*.tag'])
         .pipe(gulpif('*.tag', riot()))
         .pipe(gulpif(argv.production, uglify()))
         .pipe(concat('riot.js'))
