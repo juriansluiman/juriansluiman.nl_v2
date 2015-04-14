@@ -13,6 +13,7 @@
     "humane-js": "^3.2.2",
     "lodash": "^3.6.0",
     "normalize.css": "^3.0.3",
+    "prismjs": "git://github.com/PrismJS/prism",
     "riot": "^2.0.14",
     "skeleton.css": "^1.1.0",
     "yargs": "^3.7.1"

@@ -27,7 +27,8 @@ gulp.task('styles', function () {
 gulp.task('scripts', function () {
     // Frontpage scripts
     var scripts = [
-        'public/scripts/src/*.js',
+        'public/scripts/src/fonts.js',
+        'node_modules/prismjs/components/prism-{core,markup,css,clike,javascript,git,http,php,php-extras,python,sql}.js',
         'node_modules/lodash/index.js',
         'node_modules/humane-js/humane.js'
     ];
